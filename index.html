@@ -145,7 +145,7 @@
 			
 			if ( newNum > this.numLilies) {
 				for (let i = this.numLilies; i < newNum; i++) {
-					this.lilyPositions.push(this.evenlyDistributedPosition(i+1, newNum));
+					this.lilyPositions.push(this.evenlyDistributedPosition(i, newNum));
 				}
 			} else if (newNum < this.numLilies) {
 				this.lilyPositions.splice(newNum);
@@ -173,7 +173,7 @@
 				r = r = 0.15*this.radius+Math.random(0.2);
 				angle = i * goldenAngle;
 			}
-			if (total == 1) {
+			if (i == 0) {
 				r = 0;
 			}
 			console.log(i, total,r, angle);
@@ -192,8 +192,8 @@
 		  let seaweedImage;
 		  
 		  p.preload = function () {
-			lilyImage = p.loadImage("https://cdn.creazilla.com/cliparts/3227374/water-lily-clipart-xl.png");
-			seaweedImage = p.loadImage("https://cdn.creazilla.com/cliparts/15753/wakame-seaweed-clipart-original.png");
+			lilyImage = p.loadImage("seerose.png");
+			seaweedImage = p.loadImage("seegras.png");
 		};
 		  
           p.setup = function () {
@@ -201,9 +201,9 @@
             c.parent(containerId);
 			
 			if (containerId == "lilies") {
-				sim = new LakeSim(containerId, lilyImage, "exp");
+				sim = new LakeSim(containerId, lilyImage, "exp", 0, 3);
 			} else {
-				sim = new LakeSim(containerId, seaweedImage, "linear");
+				sim = new LakeSim(containerId, seaweedImage, "linear", 0, 3);
 			}
             sim.setup(p);
             sims.push(sim);
