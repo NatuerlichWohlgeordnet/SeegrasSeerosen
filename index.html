@@ -10,15 +10,14 @@
         overflow: hidden;
         background-color: #87ceeb;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
         align-items: center;
         height: 100vh;
       }
       .container {
-	  width: 50%;
+		width: 50%;
         position: relative;
-        flex: 1;
         height: 100%;
       }
       .controls {
@@ -41,6 +40,20 @@
 		color: #222;
 	  }
 
+      .global-controls {
+        margin-top: 10px;
+		margin-bottom: 10px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+	  
+	  .screen {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+
       button {
         font-size: 24px;
         padding: 6px 34px;
@@ -58,26 +71,32 @@
     </style>
   </head>
   <body>
-  <div class="container" id="lilies">
-    <div class="controls">
-      <button class="minus">−</button>
-	  <div class="labels">
-      <span class="days">Tage: 0</span><br>
-	  <span class="amount">Seerosen: 0</span>
-	  </div>
-      <button class="plus">+</button>
-    </div>
-</div>
-<div class = "container" id = "seaweed">
-	<div class="controls">
-      <button class="minus">−</button>
-	  <div class="labels">
-      <span class="days">Tage: 0</span><br>
-	  <span class="amount">Seegras: 0</span>
-	  </div>
-      <button class="plus">+</button>
-    </div>
-</div>
+  
+	<div class="global-controls">
+		<button id="globalMinus">−</button>
+		<button id="globalPlus">+</button>
+	</div>
+	
+	<div class ="screen">
+		<div class="container" id="lilies">
+			<div class="controls">
+				<div class="labels">
+					<span class="days">Tage: 0</span><br>
+					<span class="amount">Seerosen: 0</span>
+				</div>
+			</div>
+		</div>
+		<div class = "container" id = "seaweed">
+			<div class="controls">
+				<!-- <button class="minus">−</button> -->
+				<div class="labels">
+				<span class="days">Tage: 0</span><br>
+				<span class="amount">Seegras: 0</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
     <script>
 	  
 	class LakeSim {
@@ -92,8 +111,8 @@
 			this.growth = growth;
 		
 		    const container = document.querySelector(`#${parentId}`);
-			this.plusBtn = container.querySelector(".plus");
-			this.minusBtn = container.querySelector(".minus");
+			this.plusBtn = document.querySelector("#globalPlus");
+			this.minusBtn = document.querySelector("#globalMinus");
 			this.dayLabel = container.querySelector(".days");
 			this.countLabel = container.querySelector(".amount");
 
@@ -176,7 +195,6 @@
 			if (i == 0) {
 				r = 0;
 			}
-			console.log(i, total,r, angle);
 			const x = r * Math.cos(angle);
 			const y = r * Math.sin(angle);
 		
@@ -192,8 +210,8 @@
 		  let seaweedImage;
 		  
 		  p.preload = function () {
-			lilyImage = p.loadImage("seerose.png");
-			seaweedImage = p.loadImage("seegras.png");
+			lilyImage = p.loadImage("https://cdn.creazilla.com/cliparts/3227374/water-lily-clipart-xl.png");
+			seaweedImage = p.loadImage("https://cdn.creazilla.com/cliparts/15753/wakame-seaweed-clipart-original.png");
 		};
 		  
           p.setup = function () {
